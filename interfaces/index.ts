@@ -2,9 +2,24 @@
 // and then use them in any component by importing them. For
 // example, to import the interface below do:
 //
-// import { User } from 'path/to/interfaces';
+// import { User } from 'path/to/interfaces'; 
 
-export type User = {
-  id: number
-  name: string
+export interface Family {
+  baseVariantImages: string[]
+  slug: string
+  title: string
+  uuid: string
+  familyPrice?: {
+    min?: number
+    max?: number
+  }
+}
+
+export type Car = {
+  slug: string
+  title: string
+  uuid: string
+  type: string
+  makeableId: number
+  families: Family[]
 }

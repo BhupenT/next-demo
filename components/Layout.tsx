@@ -1,32 +1,40 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 type Props = {
   children?: ReactNode
   title?: string
 }
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
-  <div>
-    <Head>
-      <title>{title}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-    <header>
-      <nav>
-        <Link href="/">Home</Link> | <Link href="/about">About</Link> |{' '}
-        <Link href="/users">Users List</Link> |{' '}
-        <a href="/api/users">Users API</a>
-      </nav>
-    </header>
-    {children}
-    <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
-    </footer>
-  </div>
-)
+const Layout = ({ children, title = 'This is the default title' }: Props) => {
+  const router = useRouter()
+
+  return (
+    <div>
+      <Head>
+        <title>{title}</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <header>
+        <nav>
+          <Link className={router?.pathname === '/' ? 'current' : undefined} href="/">Home</Link>
+          <Link className={router?.pathname === '/about' ? 'current' : undefined} href="/about">About</Link>
+          <Link className={router?.pathname === '/cars' ? 'current' : undefined} href="/cars">cars List</Link>
+          <a target="_blank" href="/api/cars">cars API</a>
+        </nav>
+      </header>
+      <div className='layout'>
+        {children}
+      </div>
+      <footer>
+        <hr />
+        <span>Drive Footer</span>
+      </footer>
+    </div>
+  )
+}
 
 export default Layout
